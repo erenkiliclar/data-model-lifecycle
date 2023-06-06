@@ -6,6 +6,7 @@ from colorama import Fore, Style
 from dateutil.parser import parse
 
 from taxifare.params import *
+from taxifare.ml_logic import registry
 from taxifare.ml_logic.data import get_data_with_cache, clean_data, load_data_to_bq
 from taxifare.ml_logic.model import initialize_model, compile_model, train_model, evaluate_model
 from taxifare.ml_logic.preprocessor import preprocess_features
@@ -157,7 +158,8 @@ def train(
     save_model(model=model)
 
     # The latest model should be moved to staging
-    pass  # YOUR CODE HERE
+    model_uri = "https://mlflow.lewagon.ai"
+    registry.mlflow_transition_model(model_uri, new_stage="Staging")
 
     print("✅ train() done \n")
 

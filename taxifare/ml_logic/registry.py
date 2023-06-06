@@ -18,7 +18,11 @@ def save_results(params: dict, metrics: dict) -> None:
     - (unit 03 only) if MODEL_TARGET='mlflow', also persist them on MLflow
     """
     if MODEL_TARGET == "mlflow":
-        pass  # YOUR CODE HERE
+        if params is not None:
+            mlflow.log_params(params)
+        if metrics is not None:
+            mlflow.log_metrics(metrics)
+        print("✅ Results saved on mlflow")
 
     timestamp = time.strftime("%Y%m%d-%H%M%S")
 
@@ -66,7 +70,11 @@ def save_model(model: keras.Model = None) -> None:
         return None
 
     if MODEL_TARGET == "mlflow":
-        pass  # YOUR CODE HERE
+        mlflow.tensorflow.log_model(model=model,
+                        artifact_path="model",
+                        registered_model_name=MLFLOW_MODEL_NAME
+                        )
+    print("✅ Model saved to mlflow")
 
     return None
 
