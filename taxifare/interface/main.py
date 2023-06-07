@@ -158,8 +158,8 @@ def train(
     save_model(model=model)
 
     # The latest model should be moved to staging
-    model_uri = "https://mlflow.lewagon.ai"
-    registry.mlflow_transition_model(model_uri, new_stage="Staging")
+    registry.mlflow_transition_model(current_stage="Production",
+                                     new_stage="Staging")
 
     print("✅ train() done \n")
 
