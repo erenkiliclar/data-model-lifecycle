@@ -158,7 +158,7 @@ def train(
     save_model(model=model)
 
     # The latest model should be moved to staging
-    registry.mlflow_transition_model(current_stage="Production",
+    registry.mlflow_transition_model(current_stage="None",
                                      new_stage="Staging")
 
     print("✅ train() done \n")

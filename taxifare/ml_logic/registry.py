@@ -147,7 +147,7 @@ def load_model(stage="Production") -> keras.Model:
             print(f"\n❌ No model found with name {MLFLOW_MODEL_NAME} in stage {stage}")
             return None
 
-        model = mlflow.keras.load_model(model_uri=model_uri)
+        model = mlflow.tensorflow.load_model(model_uri=model_uri)
 
         print("✅ model loaded from mlflow")
 
